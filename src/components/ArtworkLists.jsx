@@ -7,13 +7,14 @@ const ArtworkLists = () => {
 	const artworks = useSelector((state) => state.lists)
 	const dispatch = useDispatch()
 	const downloadRef = useRef(null)
-	console.log(artworks)
+	const downloadFontSpiderRef = useRef(null)
 
 	const newArtworks = useMemo(() => {
 		return artworks.map((artwork) => {
 			return { ...artwork, id: undefined }
 		})
 	}, [artworks])
+
 	const fontSpider = useMemo(() => {
 		let font = []
 		let fontString = ''
@@ -33,14 +34,14 @@ const ArtworkLists = () => {
 		})
 		return fontString
 	}, [artworks])
-	console.log(fontSpider)
+
 	const handleDelete = (id) => {
 		dispatch(deleteArtwork(id))
 	}
 	const handleDownload = () => {
 		if (artworks.length === 0) return
 		downloadRef.current.click()
-		console.log(JSON.stringify(newArtworks, null, 2))
+		setTimeout(() => downloadFontSpiderRef.current.click(), 500)
 	}
 	return (
 		<>
@@ -57,6 +58,14 @@ const ArtworkLists = () => {
 						JSON.stringify(newArtworks, null, 4)
 					)}`}
 					download={`newArtworkList.txt`}
+				></a>
+				<a
+					ref={downloadFontSpiderRef}
+					className="d-none hidden"
+					href={`data:text/json;charset=utf-8,${encodeURIComponent(
+						JSON.stringify(fontSpider)
+					)}`}
+					download={`fontSpider.txt`}
 				></a>
 			</Stack>
 			<ListGroup>
