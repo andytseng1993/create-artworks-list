@@ -11,15 +11,17 @@ datasource db {
 }
 
 model Material {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  label   String
-  value   String
-  valueEg String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  label     String
+  value     String
+  valueEg   String
+  createdAt DateTime @default(now())
 }
 
 model Type {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  label   String
-  value   String
-  valueEg String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  label     String
+  value     String
+  valueEg   String
+  createdAt DateTime @default(now())
 }
