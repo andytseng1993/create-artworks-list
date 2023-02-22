@@ -57,26 +57,17 @@ const CreateJson = () => {
 			price: priceCalc(),
 			solded: soldedRef.current.checked,
 		}
-		// const spiderFont = [
-		// 	chineseTitleRef.current.value,
-		// 	typeValuse.value,
-		// 	material[0],
-		// ]
-		// console.log(spiderFont)
-
 		dispatch(addArtwork(artWorkDetail))
-		// chineseTitleRef.current.value = ''
-		// titleRef.current.value = ''
-		// setTypeValuse([])
-		// setMaterialValuse([])
-		// yearRef.current.value = ''
-		// widthRef.current.value = ''
-		// heightRef.current.value = ''
-		// setSellValue(false)
-		// priceRef.current.value = ''
-		// soldedRef.current.checked = false
-
-		// console.log(JSON.stringify(artWorkDetail, null, 2))
+		chineseTitleRef.current.value = ''
+		titleRef.current.value = ''
+		setTypeValuse([])
+		setMaterialValuse([])
+		yearRef.current.value = ''
+		widthRef.current.value = ''
+		heightRef.current.value = ''
+		setSellValue(false)
+		priceRef.current.value = ''
+		soldedRef.current.checked = false
 	}
 
 	return (
