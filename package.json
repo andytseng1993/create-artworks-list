@@ -1,0 +1,33 @@
+{
+  "name": "shu-create",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js",
+    "client": "npm run dev --prefix ./client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andytseng1993/create-artworks-list.git"
+  },
+  "author": "Yuhsien",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andytseng1993/create-artworks-list/issues"
+  },
+  "homepage": "https://github.com/andytseng1993/create-artworks-list#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "prisma": "^4.10.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.10.1"
+  }
+}
