@@ -46,9 +46,12 @@ const CreateJson = () => {
 		const material = materials()
 		const artWorkDetail = {
 			id: uuidv4(),
-			title: [chineseTitleRef.current.value, titleRef.current.value],
-			thumbnail: `${titleRef.current.value}_min.jpg`,
-			src: `${titleRef.current.value}.jpg`,
+			title: [
+				chineseTitleRef.current.value.trim(),
+				titleRef.current.value.trim(),
+			],
+			thumbnail: `${titleRef.current.value.trim()}_min.jpg`,
+			src: `${titleRef.current.value.trim()}.jpg`,
 			type: [typeValuse.value, typeValuse.valueEg],
 			material: material,
 			year: Number(yearRef.current.value),
@@ -76,9 +79,17 @@ const CreateJson = () => {
 				<ArtworkLists />
 			</div>
 			<div className="col-7 my-3 px-5">
-				<Stack direction="horizontal" gap={4} className="mb-4">
-					<Button variant="primary">Add Type</Button>
-					<Button variant="primary">Add Material</Button>
+				<Stack
+					direction="horizontal"
+					gap={4}
+					className="mb-4 d-flex justify-content-between"
+				>
+					<h3>AtrWork Detail :</h3>
+
+					<Stack direction="horizontal" gap={4}>
+						<Button variant="primary">Add Type</Button>
+						<Button variant="primary">Add Material</Button>
+					</Stack>
 				</Stack>
 				<Form onSubmit={handleSubmit}>
 					<FormField
