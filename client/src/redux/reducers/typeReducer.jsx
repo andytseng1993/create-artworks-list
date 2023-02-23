@@ -16,6 +16,12 @@ export const typeReducer = (state = initial, action) => {
 			})
 			localStorage.setItem('types', JSON.stringify(newTypes))
 			return newTypes
+		case ACTIONS.DELETE_TYPE:
+			const deleteType = state.filter((type) => {
+				return type.id !== action.payload
+			})
+			localStorage.setItem('types', JSON.stringify(deleteType))
+			return deleteType
 		default:
 			return state
 	}

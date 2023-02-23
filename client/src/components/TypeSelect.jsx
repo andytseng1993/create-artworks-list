@@ -1,8 +1,12 @@
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Select from 'react-select'
 
 const TypeSelect = ({ name, typeValuse, setTypeValuse }) => {
 	const typeOptions = useSelector((state) => state.types)
+	useEffect(() => {
+		setTypeValuse(null)
+	}, [typeOptions])
 	return (
 		<Select
 			isSearchable

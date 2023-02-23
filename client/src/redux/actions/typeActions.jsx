@@ -31,15 +31,26 @@ export const createType = (data) => (dispatch, getState) => {
 		.catch((err) => console.log(err))
 }
 export const editType = (data) => (dispatch) => {
-	axios.put('/api/type', data).then((res) => {
-		dispatch({
-			type: ACTIONS.EDIT_TYPE,
-			payload: res.data,
+	axios
+		.put('/api/type', data)
+		.then((res) => {
+			dispatch({
+				type: ACTIONS.EDIT_TYPE,
+				payload: res.data,
+			})
 		})
-	})
+		.catch((err) => console.log(err))
 }
-export const deleteType = () => {
-	return {
-		type: ACTIONS.DELETE_TYPE,
+export const deleteType =
+	({ id }) =>
+	(dispatch) => {
+		axios
+			.delete(`/api/type/${id}`)
+			.then(() => {
+				dispatch({
+					type: ACTIONS.DELETE_TYPE,
+					payload: id,
+				})
+			})
+			.catch((err) => console.log(err))
 	}
-}

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Button, Form, Modal, Stack } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { createType, editType } from '../redux/actions/typeActions'
+import { createType, deleteType, editType } from '../redux/actions/typeActions'
 import CreateBtn from './CreateBtn'
+import DeleteField from './DeleteField'
 import EditField from './EditField'
 import TypeSelect from './TypeSelect'
 
@@ -33,8 +34,13 @@ const EditType = () => {
 		dispatch(editType(data))
 		toggle()
 	}
-
-	const DeleteCategory = () => {}
+	const handleDelete = (id) => {
+		const data = {
+			id,
+		}
+		dispatch(deleteType(data))
+		toggle()
+	}
 
 	const toggle = () => {
 		setShow(false)
@@ -44,7 +50,6 @@ const EditType = () => {
 		setErrorMsg('')
 	}
 
-	const handleDeleteType = () => {}
 	return (
 		<>
 			<Button variant="primary" onClick={() => setShow(true)}>
@@ -63,27 +68,12 @@ const EditType = () => {
 				</Modal.Header>
 				<Modal.Body>
 					{deleteBtn ? (
-						<Stack gap={2}>
-							<h5>
-								Do you want to <strong>delete</strong> {'"'}
-							</h5>
-
-							<Stack
-								direction="horizontal"
-								gap={3}
-								className="justify-content-end my-3"
-							>
-								<Button
-									variant="outline-secondary"
-									onClick={() => setDeleteBtn(!deleteBtn)}
-								>
-									Cancel
-								</Button>
-								<Button variant="danger" onClick={DeleteCategory}>
-									Delete
-								</Button>
-							</Stack>
-						</Stack>
+						<DeleteField
+							setDeleteBtn={setDeleteBtn}
+							TypeSelect={TypeSelect}
+							name={'Type'}
+							handleDelete={handleDelete}
+						/>
 					) : editBtn ? (
 						<EditField
 							name={'Type'}

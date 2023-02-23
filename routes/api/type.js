@@ -70,10 +70,10 @@ router.put('/', async (req, res) => {
 //@route DELETE api/type
 //@desc return success
 //@access Public
-router.delete('/', async (req, res) => {
-	const { id } = req.body
+router.delete('/:id', async (req, res) => {
+	const id = req.params.id
 	try {
-		const type = await prisma.material.delete({
+		const type = await prisma.type.delete({
 			where: {
 				id,
 			},
