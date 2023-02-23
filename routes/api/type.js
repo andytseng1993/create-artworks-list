@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 //@route PUT api/type
 //@desc update a type
 //@access Public
-router.post('/', async (req, res) => {
+router.put('/', async (req, res) => {
 	const { value, valueEg, id } = req.body
 	try {
 		const type = await prisma.type.update({

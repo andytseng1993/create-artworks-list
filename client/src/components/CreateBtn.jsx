@@ -9,12 +9,12 @@ const CreateBtn = ({ name, setCreateBtn, handleCreate }) => {
 			<h5>Create Type</h5>
 			<Stack gap={2}>
 				<Form>
-					<Form.Label>English {name}:</Form.Label>
-					<Form.Control type="text" autoFocus={true} ref={englishName} />
-				</Form>
-				<Form>
 					<Form.Label>中文 {name}:</Form.Label>
 					<Form.Control type="text" autoFocus={true} ref={chineseName} />
+				</Form>
+				<Form>
+					<Form.Label>English {name}:</Form.Label>
+					<Form.Control type="text" autoFocus={true} ref={englishName} />
 				</Form>
 			</Stack>
 			<Stack

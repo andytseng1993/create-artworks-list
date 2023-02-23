@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Button, Form, Modal, Stack } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { createType, editType } from '../redux/actions/typeActions'
 import CreateBtn from './CreateBtn'
 import EditField from './EditField'
 import TypeSelect from './TypeSelect'
@@ -10,8 +12,28 @@ const EditType = () => {
 	const [deleteBtn, setDeleteBtn] = useState(false)
 	const [editBtn, setEditBtn] = useState(false)
 	const [errorMsg, setErrorMsg] = useState('')
+	const dispatch = useDispatch()
 
-	const handleCreate = () => {}
+	const handleCreate = (english, chinese) => {
+		if (english.trim() === '' || chinese.trim() === '') return
+
+		const data = {
+			valueEg: english.trim(),
+			value: chinese.trim(),
+		}
+		dispatch(createType(data))
+		toggle()
+	}
+	const handleEdit = (value, valueEg, id) => {
+		const data = {
+			value,
+			valueEg,
+			id,
+		}
+		dispatch(editType(data))
+		toggle()
+	}
+
 	const DeleteCategory = () => {}
 
 	const toggle = () => {
@@ -67,6 +89,7 @@ const EditType = () => {
 							name={'Type'}
 							setEditBtn={setEditBtn}
 							TypeSelect={TypeSelect}
+							handleEdit={handleEdit}
 						/>
 					) : createBtn ? (
 						<CreateBtn

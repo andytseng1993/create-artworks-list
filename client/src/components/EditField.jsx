@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react'
 import { Button, Form, Stack } from 'react-bootstrap'
 
-const EditField = ({ name, setEditBtn, TypeSelect }) => {
+const EditField = ({ name, setEditBtn, TypeSelect, handleEdit }) => {
 	const [value, setValue] = useState(null)
 	const editValueRef = useRef(null)
 	const editEgValueRef = useRef(null)
+
 	const handleEditBtn = () => {
 		if (
 			editValueRef.current.value.trim() === '' ||
@@ -12,6 +13,11 @@ const EditField = ({ name, setEditBtn, TypeSelect }) => {
 			value === null
 		)
 			return
+		handleEdit(
+			editValueRef.current.value.trim(),
+			editEgValueRef.current.value.trim(),
+			value.id
+		)
 	}
 	return (
 		<Stack gap={2}>

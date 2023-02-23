@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { addArtwork } from '../redux/actions/listActions'
@@ -8,6 +8,7 @@ import MaterialSelect from './MaterialSelect'
 import TypeSelect from './TypeSelect'
 import { v4 as uuidv4 } from 'uuid'
 import EditType from './EditType'
+import { getType } from '../redux/actions/typeActions'
 
 const CreateJson = () => {
 	const chineseTitleRef = useRef(null)
@@ -22,8 +23,11 @@ const CreateJson = () => {
 	const priceRef = useRef(null)
 	const soldedRef = useRef(null)
 	const dispatch = useDispatch()
-	const types = useSelector((state) => state.types)
-	console.log(types)
+
+	useEffect(() => {
+		dispatch(getType())
+	}, [])
+
 	const materials = () => {
 		let english = []
 		let chinese = []

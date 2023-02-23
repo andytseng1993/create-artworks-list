@@ -1,13 +1,14 @@
+import { useSelector } from 'react-redux'
 import Select from 'react-select'
-import TypeOptions from '../docs/TypeOptions'
 
 const TypeSelect = ({ name, typeValuse, setTypeValuse }) => {
+	const typeOptions = useSelector((state) => state.types)
 	return (
 		<Select
 			isSearchable
 			isClearable
 			name={name}
-			options={TypeOptions}
+			options={typeOptions}
 			className="basic-multi-select w-100"
 			classNamePrefix="select"
 			value={typeValuse}
