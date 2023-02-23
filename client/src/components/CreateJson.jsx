@@ -204,7 +204,7 @@ const CreateJson = () => {
 					<Form.Group className="mb-3" controlId="Solded">
 						<Form.Check type="checkbox" label="Solded ?" ref={soldedRef} />
 					</Form.Group>
-					<Button variant="primary" type="submit">
+					<Button variant="primary" type="submit" className="w-100">
 						Submit
 					</Button>
 				</Form>
