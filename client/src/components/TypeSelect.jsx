@@ -8,7 +8,7 @@ const TypeSelect = ({ name, typeValuse, setTypeValuse }) => {
 			isClearable
 			name={name}
 			options={TypeOptions}
-			className="basic-multi-select"
+			className="basic-multi-select w-100"
 			classNamePrefix="select"
 			value={typeValuse}
 			onChange={(value) => setTypeValuse(value)}

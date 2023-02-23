@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Button, Form, Modal, Stack } from 'react-bootstrap'
 import CreateBtn from './CreateBtn'
+import EditField from './EditField'
+import TypeSelect from './TypeSelect'
 
 const EditType = () => {
 	const [show, setShow] = useState(false)
@@ -32,7 +34,7 @@ const EditType = () => {
 				onHide={toggle}
 				backdrop="static"
 				keyboard={false}
-				size="md"
+				size="lg"
 			>
 				<Modal.Header closeButton>
 					<Modal.Title>Edit Type</Modal.Title>
@@ -61,25 +63,11 @@ const EditType = () => {
 							</Stack>
 						</Stack>
 					) : editBtn ? (
-						<Stack gap={2}>
-							<h5>Change</h5>
-							<Form>
-								<Form.Control type="text" autoFocus={true} />
-							</Form>
-							<Stack
-								direction="horizontal"
-								gap={3}
-								className="justify-content-end my-3"
-							>
-								<Button
-									variant="outline-danger"
-									onClick={() => setEditBtn(false)}
-								>
-									Cancel
-								</Button>
-								<Button variant="primary">Edit</Button>
-							</Stack>
-						</Stack>
+						<EditField
+							name={'Type'}
+							setEditBtn={setEditBtn}
+							TypeSelect={TypeSelect}
+						/>
 					) : createBtn ? (
 						<CreateBtn
 							setCreateBtn={setCreateBtn}
