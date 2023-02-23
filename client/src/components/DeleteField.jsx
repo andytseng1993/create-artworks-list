@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, Stack } from 'react-bootstrap'
 
-const DeleteField = ({ TypeSelect, name, setDeleteBtn, handleDelete }) => {
+const DeleteField = ({ Select, name, setDeleteBtn, handleDelete }) => {
 	const [value, setValue] = useState(null)
 	const handleDeleteBtn = () => {
 		if (value === null) return
@@ -12,7 +12,7 @@ const DeleteField = ({ TypeSelect, name, setDeleteBtn, handleDelete }) => {
 			<h5>
 				Which one you want to <strong>delete</strong>?
 			</h5>
-			<TypeSelect name={name} typeValuse={value} setTypeValuse={setValue} />
+			<Select isMulti={false} name={name} value={value} setValue={setValue} />
 			<Stack
 				direction="horizontal"
 				gap={3}

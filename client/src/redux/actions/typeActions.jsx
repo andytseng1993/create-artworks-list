@@ -41,16 +41,14 @@ export const editType = (data) => (dispatch) => {
 		})
 		.catch((err) => console.log(err))
 }
-export const deleteType =
-	({ id }) =>
-	(dispatch) => {
-		axios
-			.delete(`/api/type/${id}`)
-			.then(() => {
-				dispatch({
-					type: ACTIONS.DELETE_TYPE,
-					payload: id,
-				})
+export const deleteType = (id) => (dispatch) => {
+	axios
+		.delete(`/api/type/${id}`)
+		.then(() => {
+			dispatch({
+				type: ACTIONS.DELETE_TYPE,
+				payload: id,
 			})
-			.catch((err) => console.log(err))
-	}
+		})
+		.catch((err) => console.log(err))
+}

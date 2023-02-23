@@ -7,14 +7,25 @@ import FormField from './FormField'
 import MaterialSelect from './MaterialSelect'
 import TypeSelect from './TypeSelect'
 import { v4 as uuidv4 } from 'uuid'
-import EditType from './EditType'
-import { getType } from '../redux/actions/typeActions'
+import {
+	getType,
+	createType,
+	deleteType,
+	editType,
+} from '../redux/actions/typeActions'
+import {
+	getMaterial,
+	createMaterial,
+	editMaterial,
+	deleteMaterial,
+} from '../redux/actions/mateiralAction'
+import FnBtn from './FnBtn'
 
 const CreateJson = () => {
 	const chineseTitleRef = useRef(null)
 	const titleRef = useRef(null)
-	const [typeValuse, setTypeValuse] = useState([])
-	const [materialValuse, setMaterialValuse] = useState([])
+	const [typeValue, setTypeValue] = useState(null)
+	const [materialValue, setMaterialValue] = useState(null)
 	const yearRef = useRef(null)
 	const widthRef = useRef(null)
 	const heightRef = useRef(null)
@@ -26,13 +37,14 @@ const CreateJson = () => {
 
 	useEffect(() => {
 		dispatch(getType())
+		dispatch(getMaterial())
 	}, [])
 
 	const materials = () => {
 		let english = []
 		let chinese = []
 		let result = []
-		materialValuse.map((material) => {
+		materialValue.map((material) => {
 			english.push(material.valueEg)
 			chinese.push(material.value)
 		})
@@ -58,7 +70,7 @@ const CreateJson = () => {
 			],
 			thumbnail: `${titleRef.current.value.trim()}_min.jpg`,
 			src: `${titleRef.current.value.trim()}.jpg`,
-			type: [typeValuse.value, typeValuse.valueEg],
+			type: [typeValue.value, typeValue.valueEg],
 			material: material,
 			year: Number(yearRef.current.value),
 			size: `${widthRef.current.value}×${heightRef.current.value} ${unitRef.current.value}`,
@@ -69,8 +81,8 @@ const CreateJson = () => {
 		dispatch(addArtwork(artWorkDetail))
 		chineseTitleRef.current.value = ''
 		titleRef.current.value = ''
-		setTypeValuse([])
-		setMaterialValuse([])
+		setTypeValue(null)
+		setMaterialValue(null)
 		yearRef.current.value = ''
 		widthRef.current.value = ''
 		heightRef.current.value = ''
@@ -93,8 +105,20 @@ const CreateJson = () => {
 					<h3>AtrWork Detail :</h3>
 
 					<Stack direction="horizontal" gap={4}>
-						<EditType />
-						<Button variant="primary">Add Material</Button>
+						<FnBtn
+							createAction={createType}
+							deleteAction={deleteType}
+							editAction={editType}
+							name={'Type'}
+							Select={TypeSelect}
+						/>
+						<FnBtn
+							createAction={createMaterial}
+							deleteAction={deleteMaterial}
+							editAction={editMaterial}
+							name={'Mateiral'}
+							Select={MaterialSelect}
+						/>
 					</Stack>
 				</Stack>
 				<Form onSubmit={handleSubmit}>
@@ -115,16 +139,16 @@ const CreateJson = () => {
 						<Form.Label>Type</Form.Label>
 						<TypeSelect
 							name={'Type'}
-							typeValuse={typeValuse}
-							setTypeValuse={setTypeValuse}
+							value={typeValue}
+							setValue={setTypeValue}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId={'Material'}>
 						<Form.Label>Material</Form.Label>
 						<MaterialSelect
 							name={'Material'}
-							materialValuse={materialValuse}
-							setMaterialValuse={setMaterialValuse}
+							value={materialValue}
+							setValue={setMaterialValue}
 						/>
 					</Form.Group>
 					<FormField

@@ -1,18 +1,28 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import Select from 'react-select'
-import MaterialOptions from '../docs/MaterialOptions'
 
-const MaterialSelect = ({ name, materialValuse, setMaterialValuse }) => {
+const MaterialSelect = ({ name, value, setValue, isMulti = true }) => {
+	const MaterialOptions = useSelector((state) => state.materials)
+	useEffect(() => {
+		setValue(null)
+	}, [MaterialOptions])
 	return (
 		<Select
-			isMulti
+			isMulti={isMulti}
 			isSearchable
 			isClearable
 			name={name}
 			options={MaterialOptions}
-			className="basic-multi-select"
+			className="basic-multi-select w-100"
 			classNamePrefix="select"
-			value={materialValuse}
-			onChange={(values) => setMaterialValuse([...values])}
+			value={value}
+			onChange={(values) => {
+				if (Array.isArray(values)) {
+					return setValue([...values])
+				}
+				return setValue(values)
+			}}
 		/>
 	)
 }

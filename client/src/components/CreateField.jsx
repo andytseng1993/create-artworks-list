@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { Button, Form, Stack } from 'react-bootstrap'
 
-const CreateBtn = ({ name, setCreateBtn, handleCreate }) => {
+const CreateField = ({ name, setCreateBtn, handleCreate }) => {
 	const englishName = useRef(null)
 	const chineseName = useRef(null)
 	return (
@@ -14,7 +14,7 @@ const CreateBtn = ({ name, setCreateBtn, handleCreate }) => {
 				</Form>
 				<Form>
 					<Form.Label>English {name}:</Form.Label>
-					<Form.Control type="text" autoFocus={true} ref={englishName} />
+					<Form.Control type="text" ref={englishName} />
 				</Form>
 			</Stack>
 			<Stack
@@ -37,4 +37,4 @@ const CreateBtn = ({ name, setCreateBtn, handleCreate }) => {
 		</Stack>
 	)
 }
-export default CreateBtn
+export default CreateField

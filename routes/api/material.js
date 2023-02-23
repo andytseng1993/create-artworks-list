@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 //@route PUT api/material
 //@desc update a material
 //@access Public
-router.post('/', async (req, res) => {
+router.put('/', async (req, res) => {
 	const { value, valueEg, id } = req.body
 	try {
 		const material = await prisma.material.update({
@@ -70,8 +70,8 @@ router.post('/', async (req, res) => {
 //@route DELETE api/material
 //@desc return success
 //@access Public
-router.delete('/', async (req, res) => {
-	const { id } = req.body
+router.delete('/:id', async (req, res) => {
+	const id = req.params.id
 	try {
 		const material = await prisma.material.delete({
 			where: {

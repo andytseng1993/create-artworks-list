@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Button, Form, Stack } from 'react-bootstrap'
 
-const EditField = ({ name, setEditBtn, TypeSelect, handleEdit }) => {
+const EditField = ({ name, setEditBtn, Select, handleEdit }) => {
 	const [value, setValue] = useState(null)
 	const editValueRef = useRef(null)
 	const editEgValueRef = useRef(null)
@@ -27,7 +27,12 @@ const EditField = ({ name, setEditBtn, TypeSelect, handleEdit }) => {
 				className="d-flex align-items-center"
 			>
 				<h5>Change: </h5>
-				<TypeSelect name={name} typeValuse={value} setTypeValuse={setValue} />
+				<Select
+					isMulti={false}
+					name={name}
+					typeValuse={value}
+					setValue={setValue}
+				/>
 			</Stack>
 			<Stack
 				direction="horizontal"
@@ -37,7 +42,7 @@ const EditField = ({ name, setEditBtn, TypeSelect, handleEdit }) => {
 				<p className="w-25 m-0">{value ? value.value : 'Chinese'}</p>
 				<h5>{'=>'}</h5>
 				<Form className="w-75">
-					<Form.Control type="text" autoFocus={true} ref={editValueRef} />
+					<Form.Control type="text" ref={editValueRef} placeholder="Chinese" />
 				</Form>
 			</Stack>
 			<Stack
@@ -48,7 +53,11 @@ const EditField = ({ name, setEditBtn, TypeSelect, handleEdit }) => {
 				<p className="w-25 m-0">{value ? value.valueEg : 'English'}</p>
 				<h5>{'=>'}</h5>
 				<Form className="w-75">
-					<Form.Control type="text" autoFocus={true} ref={editEgValueRef} />
+					<Form.Control
+						type="text"
+						ref={editEgValueRef}
+						placeholder="English"
+					/>
 				</Form>
 			</Stack>
 

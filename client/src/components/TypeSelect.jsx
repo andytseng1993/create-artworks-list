@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Select from 'react-select'
 
-const TypeSelect = ({ name, typeValuse, setTypeValuse }) => {
+const TypeSelect = ({ name, value, setValue }) => {
 	const typeOptions = useSelector((state) => state.types)
 	useEffect(() => {
-		setTypeValuse(null)
+		setValue(null)
 	}, [typeOptions])
 	return (
 		<Select
@@ -15,8 +15,8 @@ const TypeSelect = ({ name, typeValuse, setTypeValuse }) => {
 			options={typeOptions}
 			className="basic-multi-select w-100"
 			classNamePrefix="select"
-			value={typeValuse}
-			onChange={(value) => setTypeValuse(value)}
+			value={value}
+			onChange={(value) => setValue(value)}
 		/>
 	)
 }

@@ -1,18 +1,15 @@
 import { useState } from 'react'
-import { Button, Form, Modal, Stack } from 'react-bootstrap'
+import { Button, Modal, Stack } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { createType, deleteType, editType } from '../redux/actions/typeActions'
-import CreateBtn from './CreateBtn'
+import CreateField from './CreateField'
 import DeleteField from './DeleteField'
 import EditField from './EditField'
-import TypeSelect from './TypeSelect'
 
-const EditType = () => {
+const FnBtn = ({ createAction, deleteAction, editAction, name, Select }) => {
 	const [show, setShow] = useState(false)
 	const [createBtn, setCreateBtn] = useState(false)
 	const [deleteBtn, setDeleteBtn] = useState(false)
 	const [editBtn, setEditBtn] = useState(false)
-	const [errorMsg, setErrorMsg] = useState('')
 	const dispatch = useDispatch()
 
 	const handleCreate = (english, chinese) => {
@@ -22,7 +19,7 @@ const EditType = () => {
 			valueEg: english.trim(),
 			value: chinese.trim(),
 		}
-		dispatch(createType(data))
+		dispatch(createAction(data))
 		toggle()
 	}
 	const handleEdit = (value, valueEg, id) => {
@@ -31,14 +28,11 @@ const EditType = () => {
 			valueEg,
 			id,
 		}
-		dispatch(editType(data))
+		dispatch(editAction(data))
 		toggle()
 	}
 	const handleDelete = (id) => {
-		const data = {
-			id,
-		}
-		dispatch(deleteType(data))
+		dispatch(deleteAction(id))
 		toggle()
 	}
 
@@ -47,13 +41,12 @@ const EditType = () => {
 		setEditBtn(false)
 		setDeleteBtn(false)
 		setCreateBtn(false)
-		setErrorMsg('')
 	}
 
 	return (
 		<>
 			<Button variant="primary" onClick={() => setShow(true)}>
-				Edit Type
+				Edit {name}
 			</Button>
 			<Modal
 				show={show}
@@ -70,27 +63,26 @@ const EditType = () => {
 					{deleteBtn ? (
 						<DeleteField
 							setDeleteBtn={setDeleteBtn}
-							TypeSelect={TypeSelect}
-							name={'Type'}
+							Select={Select}
+							name={name}
 							handleDelete={handleDelete}
 						/>
 					) : editBtn ? (
 						<EditField
-							name={'Type'}
+							name={name}
 							setEditBtn={setEditBtn}
-							TypeSelect={TypeSelect}
+							Select={Select}
 							handleEdit={handleEdit}
 						/>
 					) : createBtn ? (
-						<CreateBtn
+						<CreateField
 							setCreateBtn={setCreateBtn}
-							name={'Type'}
+							name={name}
 							handleCreate={handleCreate}
 						/>
 					) : (
 						<Stack gap={2}>
 							<h5>Which actions you want:</h5>
-							{errorMsg ? <Alert variant="danger">{errorMsg}</Alert> : null}
 							<Stack
 								direction="horizontal"
 								gap={3}
@@ -120,4 +112,4 @@ const EditType = () => {
 	)
 }
 
-export default EditType
+export default FnBtn
