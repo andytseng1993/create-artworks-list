@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react'
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addArtwork } from '../redux/actions/listActions'
 import ArtworkLists from './ArtworkLists'
 import FormField from './FormField'
 import MaterialSelect from './MaterialSelect'
 import TypeSelect from './TypeSelect'
 import { v4 as uuidv4 } from 'uuid'
+import EditType from './EditType'
 
 const CreateJson = () => {
 	const chineseTitleRef = useRef(null)
@@ -21,7 +22,8 @@ const CreateJson = () => {
 	const priceRef = useRef(null)
 	const soldedRef = useRef(null)
 	const dispatch = useDispatch()
-
+	const types = useSelector((state) => state.types)
+	console.log(types)
 	const materials = () => {
 		let english = []
 		let chinese = []
@@ -87,7 +89,7 @@ const CreateJson = () => {
 					<h3>AtrWork Detail :</h3>
 
 					<Stack direction="horizontal" gap={4}>
-						<Button variant="primary">Add Type</Button>
+						<EditType />
 						<Button variant="primary">Add Material</Button>
 					</Stack>
 				</Stack>
