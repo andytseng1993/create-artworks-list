@@ -1,17 +1,22 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import Select from 'react-select'
-import TypeOptions from '../docs/TypeOptions'
 
-const TypeSelect = ({ name, typeValuse, setTypeValuse }) => {
+const TypeSelect = ({ name, value, setValue }) => {
+	const typeOptions = useSelector((state) => state.types)
+	useEffect(() => {
+		setValue(null)
+	}, [typeOptions])
 	return (
 		<Select
 			isSearchable
 			isClearable
 			name={name}
-			options={TypeOptions}
-			className="basic-multi-select"
+			options={typeOptions}
+			className="basic-multi-select w-100"
 			classNamePrefix="select"
-			value={typeValuse}
-			onChange={(value) => setTypeValuse(value)}
+			value={value}
+			onChange={(value) => setValue(value)}
 		/>
 	)
 }

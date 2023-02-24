@@ -19,3 +19,8 @@ export const deleteArtwork = (id) => {
 		payload: id,
 	}
 }
+export const deleteAllArtworks = () => {
+	return {
+		type: ACTIONS.DELETE_ALL_ARTWORK,
+	}
+}

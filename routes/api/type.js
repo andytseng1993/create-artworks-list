@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 //@route PUT api/type
 //@desc update a type
 //@access Public
-router.post('/', async (req, res) => {
+router.put('/', async (req, res) => {
 	const { value, valueEg, id } = req.body
 	try {
 		const type = await prisma.type.update({
@@ -70,10 +70,10 @@ router.post('/', async (req, res) => {
 //@route DELETE api/type
 //@desc return success
 //@access Public
-router.delete('/', async (req, res) => {
-	const { id } = req.body
+router.delete('/:id', async (req, res) => {
+	const id = req.params.id
 	try {
-		const type = await prisma.material.delete({
+		const type = await prisma.type.delete({
 			where: {
 				id,
 			},

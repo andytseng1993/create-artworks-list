@@ -1,7 +1,9 @@
 import { Accordion, Button, ListGroup, Stack } from 'react-bootstrap'
-import { deleteArtwork } from '../redux/actions/listActions'
+import { deleteAllArtworks, deleteArtwork } from '../redux/actions/listActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useMemo, useRef } from 'react'
+import { GoCloudDownload } from 'react-icons/go'
+import { RiDeleteBin7Fill } from 'react-icons/ri'
 
 const ArtworkLists = () => {
 	const artworks = useSelector((state) => state.lists)
@@ -35,13 +37,17 @@ const ArtworkLists = () => {
 		return fontString
 	}, [artworks])
 
-	const handleDelete = (id) => {
-		dispatch(deleteArtwork(id))
+	const handleDeleteAll = () => {
+		if (artworks.length === 0) return
+		dispatch(deleteAllArtworks())
 	}
 	const handleDownload = () => {
 		if (artworks.length === 0) return
 		downloadRef.current.click()
 		setTimeout(() => downloadFontSpiderRef.current.click(), 500)
+	}
+	const handleDelete = (id) => {
+		dispatch(deleteArtwork(id))
 	}
 	return (
 		<>
@@ -49,8 +55,15 @@ const ArtworkLists = () => {
 				direction="horizontal"
 				className="d-felx justify-content-between align-items-center"
 			>
-				<h3 className="my-4">New ArtWorks List :</h3>
-				<Button onClick={handleDownload}>Download List</Button>
+				<h3 className="my-4">ArtWorks List :</h3>
+				<Stack direction="horizontal" gap={4}>
+					<Button variant="danger" onClick={handleDeleteAll}>
+						Delete All
+					</Button>
+					<Button onClick={handleDownload} size="m">
+						<GoCloudDownload />
+					</Button>
+				</Stack>
 				<a
 					ref={downloadRef}
 					className="d-none hidden"
@@ -104,10 +117,11 @@ const ArtworkLists = () => {
 								</Accordion>
 								<Button
 									variant="danger"
-									size="sm"
+									size="m"
 									onClick={() => handleDelete(artwork.id)}
+									className="d-flex  align-items-center"
 								>
-									Delete
+									<RiDeleteBin7Fill />
 								</Button>
 							</Stack>
 						</ListGroup.Item>

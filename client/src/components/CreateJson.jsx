@@ -1,18 +1,31 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addArtwork } from '../redux/actions/listActions'
 import ArtworkLists from './ArtworkLists'
 import FormField from './FormField'
 import MaterialSelect from './MaterialSelect'
 import TypeSelect from './TypeSelect'
 import { v4 as uuidv4 } from 'uuid'
+import {
+	getType,
+	createType,
+	deleteType,
+	editType,
+} from '../redux/actions/typeActions'
+import {
+	getMaterial,
+	createMaterial,
+	editMaterial,
+	deleteMaterial,
+} from '../redux/actions/mateiralAction'
+import FnBtn from './FnBtn'
 
 const CreateJson = () => {
 	const chineseTitleRef = useRef(null)
 	const titleRef = useRef(null)
-	const [typeValuse, setTypeValuse] = useState([])
-	const [materialValuse, setMaterialValuse] = useState([])
+	const [typeValue, setTypeValue] = useState(null)
+	const [materialValue, setMaterialValue] = useState(null)
 	const yearRef = useRef(null)
 	const widthRef = useRef(null)
 	const heightRef = useRef(null)
@@ -22,11 +35,16 @@ const CreateJson = () => {
 	const soldedRef = useRef(null)
 	const dispatch = useDispatch()
 
+	useEffect(() => {
+		dispatch(getType())
+		dispatch(getMaterial())
+	}, [])
+
 	const materials = () => {
 		let english = []
 		let chinese = []
 		let result = []
-		materialValuse.map((material) => {
+		materialValue.map((material) => {
 			english.push(material.valueEg)
 			chinese.push(material.value)
 		})
@@ -46,10 +64,13 @@ const CreateJson = () => {
 		const material = materials()
 		const artWorkDetail = {
 			id: uuidv4(),
-			title: [chineseTitleRef.current.value, titleRef.current.value],
-			thumbnail: `${titleRef.current.value}_min.jpg`,
-			src: `${titleRef.current.value}.jpg`,
-			type: [typeValuse.value, typeValuse.valueEg],
+			title: [
+				chineseTitleRef.current.value.trim(),
+				titleRef.current.value.trim(),
+			],
+			thumbnail: `${titleRef.current.value.trim()}_min.jpg`,
+			src: `${titleRef.current.value.trim()}.jpg`,
+			type: [typeValue.value, typeValue.valueEg],
 			material: material,
 			year: Number(yearRef.current.value),
 			size: `${widthRef.current.value}×${heightRef.current.value} ${unitRef.current.value}`,
@@ -60,8 +81,8 @@ const CreateJson = () => {
 		dispatch(addArtwork(artWorkDetail))
 		chineseTitleRef.current.value = ''
 		titleRef.current.value = ''
-		setTypeValuse([])
-		setMaterialValuse([])
+		setTypeValue(null)
+		setMaterialValue(null)
 		yearRef.current.value = ''
 		widthRef.current.value = ''
 		heightRef.current.value = ''
@@ -76,9 +97,29 @@ const CreateJson = () => {
 				<ArtworkLists />
 			</div>
 			<div className="col-7 my-3 px-5">
-				<Stack direction="horizontal" gap={4} className="mb-4">
-					<Button variant="primary">Add Type</Button>
-					<Button variant="primary">Add Material</Button>
+				<Stack
+					direction="horizontal"
+					gap={4}
+					className="mb-4 d-flex justify-content-between"
+				>
+					<h3>AtrWork Detail :</h3>
+
+					<Stack direction="horizontal" gap={4}>
+						<FnBtn
+							createAction={createType}
+							deleteAction={deleteType}
+							editAction={editType}
+							name={'Type'}
+							Select={TypeSelect}
+						/>
+						<FnBtn
+							createAction={createMaterial}
+							deleteAction={deleteMaterial}
+							editAction={editMaterial}
+							name={'Mateiral'}
+							Select={MaterialSelect}
+						/>
+					</Stack>
 				</Stack>
 				<Form onSubmit={handleSubmit}>
 					<FormField
@@ -98,16 +139,16 @@ const CreateJson = () => {
 						<Form.Label>Type</Form.Label>
 						<TypeSelect
 							name={'Type'}
-							typeValuse={typeValuse}
-							setTypeValuse={setTypeValuse}
+							value={typeValue}
+							setValue={setTypeValue}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId={'Material'}>
 						<Form.Label>Material</Form.Label>
 						<MaterialSelect
 							name={'Material'}
-							materialValuse={materialValuse}
-							setMaterialValuse={setMaterialValuse}
+							value={materialValue}
+							setValue={setMaterialValue}
 						/>
 					</Form.Group>
 					<FormField
@@ -163,7 +204,7 @@ const CreateJson = () => {
 					<Form.Group className="mb-3" controlId="Solded">
 						<Form.Check type="checkbox" label="Solded ?" ref={soldedRef} />
 					</Form.Group>
-					<Button variant="primary" type="submit">
+					<Button variant="primary" type="submit" className="w-100">
 						Submit
 					</Button>
 				</Form>
