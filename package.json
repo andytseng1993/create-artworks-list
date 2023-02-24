@@ -2,10 +2,10 @@
   "name": "shu-create",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "Type": "module",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm run dev --prefix ./client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
@@ -28,6 +28,7 @@
     "prisma": "^4.10.1"
   },
   "dependencies": {
-    "@prisma/client": "^4.10.1"
+    "@prisma/client": "^4.10.1",
+    "vercel": "^28.16.6"
   }
 }
