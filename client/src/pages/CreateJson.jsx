@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { addArtwork } from '../redux/actions/listActions'
-import ArtworkLists from './ArtworkLists'
-import FormField from './FormField'
-import MaterialSelect from './MaterialSelect'
-import TypeSelect from './TypeSelect'
+import ArtworkLists from '../components/ArtworkLists'
+import FormField from '../components/FormField'
+import MaterialSelect from '../components/MaterialSelect'
+import TypeSelect from '../components/TypeSelect'
 import { v4 as uuidv4 } from 'uuid'
 import {
 	getType,
@@ -19,7 +19,7 @@ import {
 	editMaterial,
 	deleteMaterial,
 } from '../redux/actions/mateiralAction'
-import FnBtn from './FnBtn'
+import FnBtn from '../components/FnBtn'
 
 const CreateJson = () => {
 	const chineseTitleRef = useRef(null)

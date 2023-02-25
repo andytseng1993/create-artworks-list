@@ -1,4 +1,3 @@
-import reactLogo from './assets/react.svg'
 import 'bootstrap/dist/css/bootstrap.css'
 import {
 	createBrowserRouter,
@@ -6,14 +5,16 @@ import {
 	RouterProvider,
 	Route,
 } from 'react-router-dom'
-import AppNavBar from './components/AppNavBar'
-import CreateJson from './components/CreateJson'
+import AppNavBar from './pages/AppNavBar'
+import CreateJson from './pages/CreateJson'
+import ImageResize from './pages/ImageResize'
 
 function App() {
 	const router = createBrowserRouter(
 		createRoutesFromElements(
 			<Route path="/" element={<AppNavBar />}>
 				<Route index element={<CreateJson />} />
+				<Route path="/image" element={<ImageResize />} />
 			</Route>
 		)
 	)
