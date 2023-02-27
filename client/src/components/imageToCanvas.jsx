@@ -9,7 +9,6 @@ export async function imageToCanvas(width, height, imageSize, name, imageRef) {
 	let result = {
 		diffSize: imageSize,
 		url: '',
-		quality: 0,
 	}
 	for (let x = 1; x <= 8; x++) {
 		let data = canvas.toDataURL('image/jpeg', quality)
@@ -19,7 +18,6 @@ export async function imageToCanvas(width, height, imageSize, name, imageRef) {
 		if (result.diffSize > diff) {
 			result.diffSize = diff
 			result.url = data
-			result.quality = quality
 		}
 		if (x >= 7) {
 			y = 0.5 ** 7
@@ -29,11 +27,10 @@ export async function imageToCanvas(width, height, imageSize, name, imageRef) {
 		} else if (resultSize > imageSize) {
 			quality -= y
 		} else {
-			return
+			break
 		}
 	}
-	console.log(result)
-	downloadBase64File(data, name)
+	downloadBase64File(result.url, name)
 }
 export function downloadBase64File(base64Data, filename) {
 	var element = document.createElement('a')

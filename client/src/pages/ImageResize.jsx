@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Button, Col, Form, Image, Row, Stack } from 'react-bootstrap'
 import { preview } from '../assets'
 import { imageToCanvas } from '../components/imageToCanvas'
@@ -27,13 +27,11 @@ const ImageResize = () => {
 		handleImage(event.target.files[0])
 	}
 	const handleImage = (file) => {
-		console.log(file)
 		let reader = new FileReader()
 		let load = false
 		reader.readAsDataURL(file)
 		reader.onload = () => {
 			setPhotoSrc(reader.result)
-			console.log(Math.floor((reader.result.length - 22) / 4) * 3)
 			load = true
 		}
 		imageRef.current.onload = () => {
@@ -48,14 +46,12 @@ const ImageResize = () => {
 			})
 		}
 	}
-	console.log(photo)
 	const handleSaveImage = (resizeWidth, resizeHeight, resizeSize, min) => {
 		let widthRatio = resizeWidth / photo.width
 		let heightRatio = resizeHeight / photo.height
 		let size = resizeSize * 1024
 		let name = min ? `${photo.name}_min` : photo.name
 		if (widthRatio < heightRatio) {
-			console.log(widthRatio)
 			let width = resizeWidth
 			let height = photo.height * widthRatio
 			imageToCanvas(width, height, size, name, imageRef.current)
@@ -65,7 +61,6 @@ const ImageResize = () => {
 			imageToCanvas(width, height, size, name, imageRef.current)
 		}
 	}
-	const handleSaveThumbnail = (resizeWidth, resizeHeight, resizeSize) => {}
 
 	return (
 		<>
