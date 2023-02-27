@@ -112,6 +112,8 @@ const ArtworkLists = () => {
 											<p className="mb-1">
 												Solded ? : {artwork.solded ? 'Yes' : 'No'}
 											</p>
+											<p className="mb-1">Thumbnail : {artwork.thumbnail}</p>
+											<p className="mb-1">Image : {artwork.src}</p>
 										</Accordion.Body>
 									</Accordion.Item>
 								</Accordion>

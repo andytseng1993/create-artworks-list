@@ -68,8 +68,14 @@ const CreateJson = () => {
 				chineseTitleRef.current.value.trim(),
 				titleRef.current.value.trim(),
 			],
-			thumbnail: `${titleRef.current.value.trim()}_min.jpg`,
-			src: `${titleRef.current.value.trim()}.jpg`,
+			thumbnail: `${titleRef.current.value
+				.trim()
+				.toUpperCase()
+				.replaceAll(' ', '_')}_min.jpg`,
+			src: `${titleRef.current.value
+				.trim()
+				.toUpperCase()
+				.replaceAll(' ', '_')}.jpg`,
 			type: [typeValue.value, typeValue.valueEg],
 			material: material,
 			year: Number(yearRef.current.value),
