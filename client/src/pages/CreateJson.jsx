@@ -108,7 +108,7 @@ const CreateJson = () => {
 					gap={4}
 					className="mb-4 d-flex justify-content-between"
 				>
-					<h3>AtrWork Detail :</h3>
+					<h3>ArtWork Detail :</h3>
 
 					<Stack direction="horizontal" gap={4}>
 						<FnBtn

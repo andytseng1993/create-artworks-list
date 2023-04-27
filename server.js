@@ -12,8 +12,8 @@ app.use(express.json())
 app.use('/api/material', materialOption)
 app.use('/api/type', typeOption)
 
-// app.use(express.static(path.join(__dirname, './client/dist')))
-// app.get('*', (req, res) => {
-// 	res.sendFile(path.join(__dirname, './client/dist/index.html'))
-// })
+app.use(express.static(path.join(__dirname, './client/dist')))
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, './client/dist/index.html'))
+})
 app.listen(port, () => console.log(`Sever started on port ${port}`))
